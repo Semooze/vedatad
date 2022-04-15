@@ -1,6 +1,6 @@
 # 1. data
 dataset_type = 'Thumos14Dataset'
-data_root = 'data/thumos14/'
+data_root = 'tools/data/thumos14/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 num_frames = 768
@@ -8,8 +8,8 @@ img_shape = (112, 112)
 overlap_ratio = 0.25
 
 data = dict(
-    samples_per_gpu=4,
-    workers_per_gpu=4,
+    samples_per_gpu=2,
+    workers_per_gpu=2,
     train=dict(
         typename=dataset_type,
         ann_file=data_root + 'annotations/val.json',
@@ -202,7 +202,7 @@ hooks = [
 
 # 5. work modes
 modes = ['train']
-max_epochs = 1200
+max_epochs = 200
 
 # 6. checkpoint
 weights = dict(

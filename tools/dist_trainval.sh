@@ -4,6 +4,8 @@ if (($# < 2)); then
     echo "Uasage: bash tools/trainval.sh config_file gpus"
     exit 1
 fi
+
+
 CONFIG="$1"
 GPUS="$2"
 

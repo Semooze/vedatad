@@ -7,7 +7,8 @@ from vedacore import fileio
 from vedacore.image import imread
 from vedacore.misc import registry
 from .custom import CustomDataset
-
+import re
+import os
 
 @registry.register_module('dataset')
 class Thumos14Dataset(CustomDataset):
@@ -36,8 +37,15 @@ class Thumos14Dataset(CustomDataset):
         data_infos = []
         data = fileio.load(ann_file)
         for video_name, video_info in data['database'].items():
+            dir_name = re.search('(val|test)', video_name).group(0)
+            # print(dir_name, video_name, video_info)
+            video_file = f'/home/jupyter/project/vedatad/tools/data/thumos14/videos/{dir_name}/{video_name}.mp4'
+            if not os.path.isfile(video_file):
+                continue
             data_info = dict()
             data_info['video_name'] = video_name
+            # print(video_name)
+            # print(video_info)
             data_info['duration'] = float(video_info['duration'])
             imgfiles = glob.glob(osp.join(self.video_prefix, video_name, '*'))
             num_imgs = len(imgfiles)

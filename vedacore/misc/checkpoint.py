@@ -12,7 +12,7 @@ from torch.utils import model_zoo
 
 from ..parallel import get_dist_info, is_module_wrapper
 from .utils import mkdir_or_exist
-
+from yaml import Loader
 
 # adapted from https://github.com/open-mmlab/mmcv
 def get_torchvision_models():
@@ -30,8 +30,8 @@ def get_torchvision_models():
 def get_open_mmlab_models():
     current_dir = os.path.dirname(__file__)
     file_path = os.path.join(current_dir, '..', 'model_zoo', 'open_mmlab.yaml')
-
-    model_urls = yaml.load(open(file_path))
+    print(file_path)
+    model_urls = yaml.load(open(file_path), Loader=Loader)
 
     return model_urls
 
