@@ -41,6 +41,8 @@ def main():
 
     for video_name, video_info in database.items():
         video_file = os.path.join(video_dir, f'{video_name}.mp4')
+        if not os.path.isfile(video_file):
+            continue
         cap = cv2.VideoCapture(video_file)
         fps = float(cap.get(cv2.CAP_PROP_FPS))
         frame_count = float(cap.get(cv2.CAP_PROP_FRAME_COUNT))
