@@ -28,19 +28,7 @@ do
     if [ ! -d "videos/$mode" ]; then
         mkdir videos/$mode
     fi
-    
-    search_dir="/home/jupyter/project/vedatad/tools/data/thumos14/sample_1/$mode"
-    for entry in "$search_dir"/*
-    do
-      for file in "$entry"/*
-          do
-          mv "$file" videos/$mode
-          done
-    done
-
-    # unzip -P "THUMOS14_REGISTERED" -j videos_$mode.zip -d videos/$mode
-    # find videos/$mode/*.mp4 | grep -Ev $(echo $(find annotations/$mode/ -name "[A-Z]*.txt" | xargs cat | cut -d ' ' -f 1 | sort | uniq) | sed 's/ /|/g') | xargs rm
-    # rm videos_$mode.zip
+    unzip -P "THUMOS14_REGISTERED" -j videos_$mode.zip -d videos/$mode
+    find videos/$mode/*.mp4 | grep -Ev $(echo $(find annotations/$mode/ -name "[A-Z]*.txt" | xargs cat | cut -d ' ' -f 1 | sort | uniq) | sed 's/ /|/g') | xargs rm
+    rm videos_$mode.zip
 done
-
-
