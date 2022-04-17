@@ -29,7 +29,7 @@ do
         mkdir videos/$mode
     fi
     
-    search_dir="/home/jupyter/project/vedatad/tools/data/thumos14/$mode"
+    search_dir="/home/jupyter/project/vedatad/tools/data/thumos14/thumos_sample_1/$mode"
     for entry in "$search_dir"/*
     do
       for file in "$entry"/*
