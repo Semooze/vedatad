@@ -196,13 +196,13 @@ hooks = [
         warmup_ratio=1e-1,
         min_lr_ratio=1e-2),
     dict(typename='EvalHook', eval_cfg=dict(mode='anet')),
-    dict(typename='SnapshotHook', interval=100),
+    dict(typename='SnapshotHook', interval=30),
     dict(typename='LoggerHook', interval=10)
 ]
 
 # 5. work modes
 modes = ['train']
-max_epochs = 200
+max_epochs = 30
 
 # 6. checkpoint
 weights = dict(

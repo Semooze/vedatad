@@ -46,7 +46,7 @@ conda activate vedatad
 b. Install PyTorch and torchvision following the [official instructions](https://pytorch.org/), *e.g.*,
 
 ```shell
-conda install pytorch torchvision -c pytorch
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
 ```
 
 c. Clone the vedatad repository.
@@ -62,6 +62,11 @@ d. Install vedatad.
 ```shell
 pip install -r requirements/build.txt
 pip install -v -e .
+```
+
+e. Update ffmpeg if cannot make sample frames from video
+```
+conda update ffmpeg
 ```
 
 ## Data preparation
