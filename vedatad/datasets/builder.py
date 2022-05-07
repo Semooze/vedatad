@@ -45,6 +45,7 @@ def build_dataset(cfg, default_args=None):
     from .dataset_wrappers import (ClassBalancedDataset, ConcatDataset,
                                    RepeatDataset)
     if isinstance(cfg, (list, tuple)):
+        print('in first')
         dataset = ConcatDataset([build_dataset(c, default_args) for c in cfg])
     elif cfg['typename'] == 'RepeatDataset':
         dataset = RepeatDataset(
@@ -55,6 +56,7 @@ def build_dataset(cfg, default_args=None):
     elif isinstance(cfg.get('ann_file'), (list, tuple)):
         dataset = _concat_dataset(cfg, default_args)
     else:
+        print('in last')
         dataset = build_from_cfg(cfg, registry, 'dataset', default_args)
 
     return dataset

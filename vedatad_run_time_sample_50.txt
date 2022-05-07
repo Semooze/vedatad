@@ -1,0 +1,125 @@
+
+2022-05-01 10:33:24,188 - vedatad - INFO - Epoch [60][40/54] lr: 0.003669, loss_cls: 0.5435, loss_segment: 0.2722, loss: 0.8157
+2022-05-01 10:33:43,924 - vedatad - INFO - Epoch [60][50/54] lr: 0.003669, loss_cls: 0.5609, loss_segment: 0.2710, loss: 0.8320
+2022-05-01 10:33:54,255 - vedatad - INFO - Saved weights, optimizer, meta at epoch 60, iter 3240 as ./workdir/daotad_i3d_r50_e700_thumos14_rgb/epoch_60
+
+real    111m2.166s
+user    222m40.866s
+sys     69m49.527s
+
+
+
+[                                                  ] 0/115, elapsed: 0s,[>>>>>>>>>>>>>>>>>>] 115/115, 0.067 task/s, elapsed: 1725s, ETA:     0s
++-------------------+-----+-------+--------+-------+
+| class             | gts | dets  | recall | ap    |
++-------------------+-----+-------+--------+-------+
+| BaseballPitch     | 33  | 69366 | 0.424  | 0.000 |
+| BasketballDunk    | 419 | 32    | 0.000  | 0.000 |
+| Billiards         | 75  | 732   | 0.013  | 0.000 |
+| CleanAndJerk      | 41  | 2754  | 0.000  | 0.000 |
+| CliffDiving       | 180 | 3604  | 0.028  | 0.000 |
+| CricketBowling    | 106 | 21426 | 0.425  | 0.001 |
+| CricketShot       | 82  | 929   | 0.037  | 0.000 |
+| Diving            | 216 | 96    | 0.000  | 0.000 |
+| FrisbeeCatch      | 42  | 2664  | 0.095  | 0.000 |
+| GolfSwing         | 25  | 3698  | 0.000  | 0.000 |
+| HammerThrow       | 110 | 502   | 0.000  | 0.000 |
+| HighJump          | 89  | 0     | 0.000  | 0.000 |
+| JavelinThrow      | 81  | 3567  | 0.000  | 0.000 |
+| LongJump          | 41  | 1231  | 0.000  | 0.000 |
+| PoleVault         | 283 | 11695 | 0.004  | 0.000 |
+| Shotput           | 63  | 1     | 0.000  | 0.000 |
+| SoccerPenalty     | 17  | 512   | 0.059  | 0.000 |
+| TennisSwing       | 61  | 179   | 0.000  | 0.000 |
+| ThrowDiscus       | 31  | 593   | 0.000  | 0.000 |
+| VolleyballSpiking | 49  | 14419 | 0.265  | 0.000 |
++-------------------+-----+-------+--------+-------+
+| mAP               |     |       |        | 0.000 |
++-------------------+-----+-------+--------+-------+
+
+real    28m54.756s
+user    34m48.351s
+sys     10m10.193s
+
+
+
+
+[                                                  ] 0/115[                           ] 1/115, 0.013 task/s, elapsed[                          ] 2/115, 0.008 task/s, elapsed:[                          ] 3/115, 0.012 task/s, elapsed:[                          ] 4/115, 0.013 task/s, elapsed:[>                         ] 5/115, 0.014 task/s, elapsed:[>                         ] 6/115, 0.017 task/s, elapsed:[>                         ] 7/115, 0.020 task/s, elapsed:[>                         ] 8/115, 0.022 task/s, elapsed:[>>                        ] 9/115, 0.024 task/s, elapsed:[>>                       ] 10/115, 0.026 task/s, elapsed:[>>>>] 115/115, 0.067 task/s, elapsed: 1716s, ETA:     0s4
+
+
+-------------------+-----+-------+--------+-------+
+| class             | gts | dets  | recall | ap    |
++-------------------+-----+-------+--------+-------+
+| BaseballPitch     | 33  | 4532  | 0.939  | 0.427 |
+| BasketballDunk    | 419 | 9682  | 0.940  | 0.821 |
+| Billiards         | 75  | 5169  | 0.933  | 0.229 |
+| CleanAndJerk      | 41  | 6325  | 0.951  | 0.462 |
+| CliffDiving       | 180 | 5553  | 0.994  | 0.874 |
+| CricketBowling    | 106 | 5775  | 0.830  | 0.407 |
+| CricketShot       | 82  | 5582  | 0.707  | 0.220 |
+| Diving            | 216 | 7174  | 0.981  | 0.775 |
+| FrisbeeCatch      | 42  | 7480  | 0.833  | 0.107 |
+| GolfSwing         | 25  | 5060  | 1.000  | 0.626 |
+| HammerThrow       | 110 | 6336  | 0.764  | 0.670 |
+| HighJump          | 89  | 6601  | 0.888  | 0.525 |
+| JavelinThrow      | 81  | 10155 | 0.938  | 0.678 |
+| LongJump          | 41  | 13608 | 0.976  | 0.830 |
+| PoleVault         | 283 | 6709  | 0.986  | 0.896 |
+| Shotput           | 63  | 6856  | 0.857  | 0.158 |
+| SoccerPenalty     | 17  | 5610  | 0.882  | 0.197 |
+| TennisSwing       | 61  | 9096  | 0.820  | 0.285 |
+| ThrowDiscus       | 31  | 5833  | 1.000  | 0.610 |
+| VolleyballSpiking | 49  | 4864  | 0.837  | 0.226 |
++-------------------+-----+-------+--------+-------+
+| mAP               |     |       |        | 0.501 |
++-------------------+-----+-------+--------+-------+
+
+real    28m47.623s
+user    34m56.060s
+sys     9m58.402s
+
+
+
+(base) jupyter@theia-20220417-151030:~/project/vedatad$ ls /home/jupyter/project/Learning-Action-Completeness-from-Points/dataset/THUMOS14/features/test/flow | wc -l
+212
+(base) jupyter@theia-20220417-151030:~/project/vedatad$ ls /home/jupyter/project/Learning-Action-Completeness-from-Points/dataset/THUMOS14/features/test/rgb | wc -l
+212
+(base) jupyter@theia-20220417-151030:~/project/vedatad$ ls /home/jupyter/project/Learning-Action-Completeness-from-Points/dataset/THUMOS14/features/train/flow | wc -l
+200
+(base) jupyter@theia-20220417-151030:~/project/vedatad$ ls /home/jupyter/project/Learning-Action-Completeness-from-Points/dataset/THUMOS14/features/train/rgb | wc -l
+200
+
+
+(base) jupyter@theia-20220417-151030:~/project/vedatad$  find /home/jupyter/project/vedatad/tools/data/thumos14/frames/test -type f | wc -l
+624511
+
+
+
+(base) jupyter@theia-20220417-151030:~/project/vedatad$ ls /home/jupyter/project/vedatad/tools/data/thumos14/frames/test | wc -l
+115
+(base) jupyter@theia-20220417-151030:~/project/vedatad$ ls /home/jupyter/project/vedatad/tools/data/thumos14/frames/val | wc -l
+108
+
+
+
+(base) jupyter@theia-20220417-151030:~/project$ nvidia-smi
+Sun May  1 11:32:14 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 460.73.01    Driver Version: 460.73.01    CUDA Version: 11.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla K80           Off  | 00000000:00:04.0 Off |                    0 |
+| N/A   50C    P0   145W / 149W |  10804MiB / 11441MiB |     99%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A     27250      C   python                          10799MiB |
++-----------------------------------------------------------------------------+

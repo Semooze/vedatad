@@ -8,8 +8,8 @@ img_shape = (112, 112)
 overlap_ratio = 0.25
 
 data = dict(
-    samples_per_gpu=2,
-    workers_per_gpu=2,
+    samples_per_gpu=1,
+    workers_per_gpu=1,
     train=dict(
         typename=dataset_type,
         ann_file=data_root + 'annotations/val.json',
@@ -86,40 +86,7 @@ model = dict(
         frozen_stages=1,
         inflate=((1, 1, 1), (1, 0, 1, 0), (1, 0, 1, 0, 1, 0), (0, 1, 0)),
         zero_init_residual=False),
-    neck=[
-        dict(
-            typename='SRM',
-            srm_cfg=dict(
-                typename='AdaptiveAvgPool3d', output_size=(None, 1, 1))),
-        dict(
-            typename='TDM',
-            in_channels=2048,
-            stage_layers=(1, 1, 1, 1),
-            out_channels=512,
-            conv_cfg=dict(typename='Conv1d'),
-            norm_cfg=dict(typename='SyncBN'),
-            act_cfg=dict(typename='ReLU'),
-            out_indices=(0, 1, 2, 3, 4)),
-        dict(
-            typename='FPN',
-            in_channels=[2048, 512, 512, 512, 512],
-            out_channels=256,
-            num_outs=5,
-            start_level=0,
-            conv_cfg=dict(typename='Conv1d'),
-            norm_cfg=dict(typename='SyncBN'))
-    ],
-    head=dict(
-        typename='RetinaHead',
-        num_classes=num_classes,
-        num_anchors=num_anchors,
-        in_channels=256,
-        stacked_convs=4,
-        feat_channels=256,
-        use_sigmoid=use_sigmoid,
-        conv_cfg=dict(typename='Conv1d'),
-        norm_cfg=dict(typename='SyncBN'),
-    ))
+ )
 
 # 3. engines
 meshgrid = dict(
@@ -202,7 +169,7 @@ hooks = [
 
 # 5. work modes
 modes = ['train']
-max_epochs = 30
+max_epochs = 1
 
 # 6. checkpoint
 weights = dict(

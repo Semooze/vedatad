@@ -1,5 +1,5 @@
 from .base_looper import BaseLooper
-
+import numpy as np
 
 class EpochBasedLooper(BaseLooper):
 
@@ -11,15 +11,33 @@ class EpochBasedLooper(BaseLooper):
     def epoch_loop(self, mode):
         self.mode = mode
         dataloader = self.dataloaders[mode]
+
         engine = self.engines[mode]
         for idx, data in enumerate(dataloader):
+            print('*'*80)
+      
+            print(idx, data['video_metas'].data[0][0]['ori_video_name'])
+            print(type(data['imgs'].data[0].cpu().numpy().shape))
+            print(data['imgs'].data[0].cpu().numpy().shape)
+            # print(type(data['imgs'].data))
+            # print(len(data['imgs'].data))
+            # print(data['imgs'].data[0].cpu().numpy().shape)
+
+            # with open(f"/home/jupyter/project/new_data/train/{data['video_metas'].data[0][0]['ori_video_name']}.npy", 'wb') as f:
+            #     np.save(f, data['imgs'].data[0].cpu().numpy())
+            # print(data['video_metas'])
+            # print('*'*80)
+            # print(data['imgs'])
             self.hook_pool.fire(f'before_{mode}_iter', self)
-            self.cur_results[mode] = engine(data)
+            result = engine(data)
+            print(result)
+            self.cur_results[mode] = result
+            continue
             if mode == BaseLooper.TRAIN:
                 self._iter += 1
             self._inner_iter = idx + 1
             self.hook_pool.fire(f'after_{mode}_iter', self)
-
+        raise Exception
     def start(self, max_epochs):
         self.hook_pool.fire('before_run', self)
         while self.epoch < max_epochs:
