@@ -143,5 +143,6 @@ nohup.out
 **/tools/data/thumos14/videos/
 **/tools/data/thumos14/frames/
 **/tools/data/thumos14/thumos_sample_1/
+**/tools/data/thumos14/thumos_sample_50/
 **/tools/data/thumos14/annotations/test.json
 **/tools/data/thumos14/annotations/val.json
