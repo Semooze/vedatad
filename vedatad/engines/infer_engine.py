@@ -20,8 +20,8 @@ class InferEngine(BaseEngine):
             self.cls_out_channels = num_classes + 1
         self.test_cfg = test_cfg
 
-    def extract_feats(self, img):
-        feats = self.model(img, train=False)
+    def extract_feats(self, img, video_metas):
+        feats = self.model(img, video_metas, train=False)
         return feats
 
     def _get_raw_dets(self, imgs, video_metas):
@@ -33,7 +33,7 @@ class InferEngine(BaseEngine):
             dets(list): len(dets) is the batch size, len(dets[ii]) = #classes,
                 dets[ii][jj] is an np.array whose shape is N*3
         """
-        feats = self.extract_feats(imgs)
+        feats = self.extract_feats(imgs, video_metas)
 
         featmap_tsizes = [feat.shape[2] for feat in feats[0]]
         dtype = feats[0][0].dtype
@@ -85,12 +85,15 @@ class InferEngine(BaseEngine):
         batch_size = len(dets[0])
         nclasses = len(dets[0][0])
         merged_dets = []
+        print('Before merge')
+
         for ii in range(batch_size):
             single_video = []
             for kk in range(nclasses):
                 single_class = []
                 for jj in range(ntransforms):
                     single_class.append(dets[jj][ii][kk])
+                    print(dets[jj][ii][kk].shape)
                 single_video.append(torch.cat(single_class, axis=0))
             merged_dets.append(single_video)
 

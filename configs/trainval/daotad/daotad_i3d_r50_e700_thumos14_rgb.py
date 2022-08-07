@@ -1,15 +1,15 @@
 # 1. data
 dataset_type = 'Thumos14Dataset'
-data_root = 'data/thumos14/'
+data_root = 'tools/data/thumos14/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-num_frames = 768
+num_frames = 25
 img_shape = (112, 112)
-overlap_ratio = 0.25
+overlap_ratio = 0
 
 data = dict(
-    samples_per_gpu=4,
-    workers_per_gpu=4,
+    samples_per_gpu=1,
+    workers_per_gpu=1,
     train=dict(
         typename=dataset_type,
         ann_file=data_root + 'annotations/val.json',
@@ -19,37 +19,27 @@ data = dict(
             dict(typename='LoadAnnotations'),
             dict(typename='Time2Frame'),
             dict(
-                typename='TemporalRandomCrop',
+                typename='OverlapCropAug',
                 num_frames=num_frames,
-                iof_th=0.75),
-            dict(typename='LoadFrames', to_float32=True),
-            dict(typename='SpatialRandomCrop', crop_size=img_shape),
-            dict(
-                typename='PhotoMetricDistortion',
-                brightness_delta=32,
-                contrast_range=(0.5, 1.5),
-                saturation_range=(0.5, 1.5),
-                hue_delta=18,
-                p=0.5),
-            dict(
-                typename='Rotate',
-                limit=(-45, 45),
-                border_mode='reflect101',
-                p=0.5),
-            dict(typename='SpatialRandomFlip', flip_ratio=0.5),
-            dict(typename='Normalize', **img_norm_cfg),
-            dict(typename='Pad', size=(num_frames, *img_shape)),
-            dict(typename='DefaultFormatBundle'),
-            dict(
-                typename='Collect',
-                keys=[
-                    'imgs', 'gt_segments', 'gt_labels', 'gt_segments_ignore'
+                overlap_ratio=overlap_ratio,
+                transforms=[
+                    dict(typename='TemporalCrop'),
+                    dict(typename='LoadFrames', to_float32=True),
+                    dict(typename='SpatialCenterCrop', crop_size=img_shape),
+                    dict(typename='Normalize', **img_norm_cfg),
+                    dict(typename='Pad', size=(num_frames, *img_shape)),
+                    dict(typename='DefaultFormatBundle'),
+                    dict(
+                        typename='Collect',
+                        keys=[
+                            'imgs', 'gt_segments', 'gt_labels', 'gt_segments_ignore'
+                    ])
                 ])
         ]),
-    val=dict(
+    test=dict(
         typename=dataset_type,
-        ann_file=data_root + 'annotations/test.json',
-        video_prefix=data_root + 'frames/test',
+        ann_file=data_root + 'annotations/val.json',
+        video_prefix=data_root + 'frames/val',
         pipeline=[
             dict(typename='LoadMetaInfo'),
             dict(typename='Time2Frame'),
@@ -90,24 +80,7 @@ model = dict(
         dict(
             typename='SRM',
             srm_cfg=dict(
-                typename='AdaptiveAvgPool3d', output_size=(None, 1, 1))),
-        dict(
-            typename='TDM',
-            in_channels=2048,
-            stage_layers=(1, 1, 1, 1),
-            out_channels=512,
-            conv_cfg=dict(typename='Conv1d'),
-            norm_cfg=dict(typename='SyncBN'),
-            act_cfg=dict(typename='ReLU'),
-            out_indices=(0, 1, 2, 3, 4)),
-        dict(
-            typename='FPN',
-            in_channels=[2048, 512, 512, 512, 512],
-            out_channels=256,
-            num_outs=5,
-            start_level=0,
-            conv_cfg=dict(typename='Conv1d'),
-            norm_cfg=dict(typename='SyncBN'))
+                typename='AdaptiveAvgPool3d', output_size=(None, 1, 1)))
     ],
     head=dict(
         typename='RetinaHead',
@@ -202,7 +175,7 @@ hooks = [
 
 # 5. work modes
 modes = ['train']
-max_epochs = 1200
+max_epochs = 1
 
 # 6. checkpoint
 weights = dict(

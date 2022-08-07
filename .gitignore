@@ -136,3 +136,8 @@ eval_dirs/
 nohup.out
 *.pth
 .idea/
+
+features
+tools/data/thumos14/annotations/
+tools/data/thumos14/frames/
+tools/data/thumos14/videos/

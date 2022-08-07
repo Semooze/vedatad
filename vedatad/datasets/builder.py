@@ -5,6 +5,9 @@ import platform
 import random
 from functools import partial
 
+import torch.multiprocessing
+
+torch.multiprocessing.set_sharing_strategy('file_system')
 import numpy as np
 from torch.utils.data import DataLoader
 
@@ -104,6 +107,10 @@ def build_dataloader(dataset,
         sampler = GroupSampler(dataset, samples_per_gpu) if shuffle else None
         batch_size = num_gpus * samples_per_gpu
         num_workers = num_gpus * workers_per_gpu
+
+    # #Manual add
+    # num_workers =
+
 
     init_fn = WorkerInit(
         num_workers=num_workers, rank=rank,

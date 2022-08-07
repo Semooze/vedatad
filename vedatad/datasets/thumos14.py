@@ -7,7 +7,7 @@ from vedacore import fileio
 from vedacore.image import imread
 from vedacore.misc import registry
 from .custom import CustomDataset
-
+import os
 
 @registry.register_module('dataset')
 class Thumos14Dataset(CustomDataset):
@@ -38,6 +38,16 @@ class Thumos14Dataset(CustomDataset):
         for video_name, video_info in data['database'].items():
             data_info = dict()
             data_info['video_name'] = video_name
+
+            folder_name = "/home/semooze/Products/is-project/vedatad/features/test/rgb"
+            file_name = f"{video_name}.npy"
+            path = os.path.join(folder_name, file_name)
+            isFile = os.path.isfile(path)
+            if isFile:
+                continue
+            print(video_name)
+
+
             data_info['duration'] = float(video_info['duration'])
             imgfiles = glob.glob(osp.join(self.video_prefix, video_name, '*'))
             num_imgs = len(imgfiles)

@@ -14,5 +14,6 @@ class ValEngine(InferEngine):
         return self.forward_impl(**data)
 
     def forward_impl(self, imgs, video_metas):
+        print(video_metas)
         dets = self.infer(imgs, video_metas)
         return dets

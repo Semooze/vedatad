@@ -12,8 +12,8 @@ class TrainEngine(BaseEngine):
         self.criterion = build_criterion(criterion)
         self.optimizer = build_optimizer(self.model, optimizer)
 
-    def extract_feats(self, img):
-        feats = self.model(img, train=True)
+    def extract_feats(self, img, video_metas):
+        feats = self.model(img, video_metas, train=True)
         return feats
 
     def forward(self, data):
@@ -25,7 +25,7 @@ class TrainEngine(BaseEngine):
                      gt_segments,
                      gt_labels,
                      gt_segments_ignore=None):
-        feats = self.extract_feats(imgs)
-        losses = self.criterion.loss(feats, video_metas, gt_segments,
-                                     gt_labels, gt_segments_ignore)
-        return losses
+        feats = self.extract_feats(imgs, video_metas)
+        # losses = self.criterion.loss(feats, video_metas, gt_segments,
+        #                              gt_labels, gt_segments_ignore)
+        return feats
